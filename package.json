@@ -1,0 +1,93 @@
+{
+  "name": "send-email",
+  "displayName": "发送邮件",
+  "description": "发送邮件email文件",
+  "keywords": [
+    "email",
+    "mail"
+  ],
+  "publisher": "tudou",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.59.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "icon": "images/icon.png",
+  "activationEvents": [
+    "onCommand:extension.sendEmail"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.sendEmail",
+        "title": "发送邮件"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == html || resourceLangId == plaintext",
+          "command": "extension.sendEmail",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "configuration": {
+      "properties": {
+        "emailConfig": {
+          "host": "smtp.qq.com",
+          "port": 465,
+          "auth": {
+            "user": "",
+            "pass": ""
+          },
+          "to": "",
+          "subject": ""
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "test-compile": "tsc -p ./",
+    "test-watch": "tsc -watch -p ./",
+    "pretest": "npm run test-compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "14.x",
+    "@types/nodemailer": "^6.4.4",
+    "@types/vscode": "^1.59.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "glob": "^7.1.7",
+    "mocha": "^8.4.0",
+    "ts-loader": "^9.2.2",
+    "typescript": "^4.3.2",
+    "vscode-test": "^1.5.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/binkzhou/vscode-email/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binkzhou/vscode-email"
+  },
+  "homepage": "https://github.com/binkzhou/vscode-email/README.md",
+  "dependencies": {
+    "nodemailer": "^6.7.2"
+  }
+}
